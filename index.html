@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MU SOFTEK Solutions Pvt. Ltd.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+:root{
+  --ink:#0a0a0a;
+  --paper:#f0ede6;
+  --lime:#e8ff47;
+  --muted:rgba(240,237,230,0.45);
+  --border:rgba(240,237,230,0.08);
+}
+body{
+  cursor:default;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:'Figtree',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+}
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 52px;
+  border-bottom:1px solid var(--border);
+  background:rgba(10,10,10,.88);
+  backdrop-filter:blur(18px);
+}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;letter-spacing:3px;
+  color:var(--paper);text-decoration:none;
+  display:flex;align-items:center;gap:12px;
+}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1;}
+.nav-logo-text .brand{font-size:1.2rem;letter-spacing:4px;color:var(--paper);}
+.nav-logo-text .sub{font-size:.55rem;letter-spacing:3px;color:rgba(240,237,230,.4);font-family:'Figtree',sans-serif;font-weight:500;text-transform:uppercase;margin-top:2px;}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--lime);display:inline-block;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.7);opacity:.5;}}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-links a{
+  font-size:.78rem;font-weight:500;letter-spacing:1.5px;
+  text-transform:uppercase;color:rgba(240,237,230,.5);
+  text-decoration:none;padding:8px 15px;border-radius:2px;
+  transition:all .2s;cursor:pointer;
+}
+.nav-links a:hover{color:var(--paper);background:rgba(240,237,230,.07);}
+.nav-cta{
+  font-size:.78rem;font-weight:600;letter-spacing:1.5px;
+  text-transform:uppercase;color:#fff;
+  background:#ff4f1f;padding:9px 22px;
+  border-radius:2px;text-decoration:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,79,31,.35);}
+
+/* HERO */
+#home{
+  min-height:100vh;
+  display:grid;grid-template-rows:1fr auto;
+  padding:0 52px;padding-top:90px;
+  position:relative;overflow:hidden;
+}
+.grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:80px 80px;pointer-events:none;
+}
+.hero-glow{
+  position:absolute;width:700px;height:700px;
+  background:radial-gradient(circle,rgba(232,255,71,.06) 0%,transparent 70%);
+  top:-150px;right:-150px;pointer-events:none;
+}
+.hero-body{
+  display:flex;flex-direction:column;
+  justify-content:center;padding:50px 0 30px;
+  position:relative;z-index:1;
+}
+.hero-eyebrow{
+  font-size:.7rem;font-weight:600;letter-spacing:4px;
+  text-transform:uppercase;color:var(--lime);
+  margin-bottom:30px;
+  display:flex;align-items:center;gap:14px;
+  opacity:0;animation:slideR .6s .1s forwards;
+}
+.hero-eyebrow::before{content:'';width:38px;height:1px;background:var(--lime);}
+@keyframes slideR{from{opacity:0;transform:translateX(-18px);}to{opacity:1;transform:translateX(0);}}
+h1.htitle{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.5rem,4vw,4rem);
+  line-height:.92;letter-spacing:2px;
+  color:var(--paper);
+}
+.hline{display:block;overflow:hidden;}
+.hline span{display:block;opacity:0;transform:translateY(105%);}
+.hline:nth-child(1) span{animation:hUp .7s .3s cubic-bezier(.16,1,.3,1) forwards;}
+.hline:nth-child(2) span{animation:hUp .7s .45s cubic-bezier(.16,1,.3,1) forwards;}
+.hline:nth-child(3) span{animation:hUp .7s .6s cubic-bezier(.16,1,.3,1) forwards;}
+@keyframes hUp{to{opacity:1;transform:translateY(0);}}
+.italic-accent{
+  font-family:'Instrument Serif',serif;
+  font-style:italic;color:var(--lime);
+}
+.hero-foot{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  border-top:1px solid var(--border);
+  padding:28px 0 50px;margin-top:40px;
+  opacity:0;animation:fadeIn .8s 1s forwards;
+}
+@keyframes fadeIn{to{opacity:1;}}
+.hero-desc{max-width:340px;font-size:1rem;line-height:1.8;color:var(--muted);}
+.hero-scroll{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-size:.7rem;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(240,237,230,.3);
+}
+.scroll-bar{width:1px;height:60px;background:rgba(240,237,230,.1);position:relative;overflow:hidden;}
+.scroll-bar::after{
+  content:'';position:absolute;
+  width:1px;height:40%;background:var(--lime);
+  animation:scrollD 1.8s ease-in-out infinite;
+}
+@keyframes scrollD{0%{top:-40%;}100%{top:140%;}}
+.hero-stats{display:flex;gap:44px;}
+.stat .n{font-family:'Bebas Neue',sans-serif;font-size:2.9rem;color:var(--paper);line-height:1;}
+.stat .n sup{color:var(--lime);font-size:1.2rem;vertical-align:super;}
+.stat small{font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,237,230,.3);display:block;margin-top:4px;}
+
+/* MARQUEE */
+.marquee-wrap{
+  overflow:hidden;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:16px 0;background:#0d0d0d;
+}
+.marquee-track{
+  display:flex;animation:marquee 22s linear infinite;
+  width:max-content;
+}
+.marquee-track span{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:.95rem;letter-spacing:4px;
+  color:rgba(240,237,230,.15);
+  padding:0 36px;white-space:nowrap;
+}
+.marquee-track .mk{color:var(--lime);opacity:.35;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%)}}
+
+/* SECTION BASE */
+section:not(#home){padding:110px 52px;position:relative;}
+.sec-head{display:flex;align-items:center;gap:18px;margin-bottom:60px;}
+.sec-num{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:3px;color:var(--lime);}
+.sec-dash{width:44px;height:1px;background:var(--border);}
+.sec-tag{font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,.3);}
+h2.stitle{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.5rem,4vw,4rem);
+  letter-spacing:2px;line-height:.95;color:var(--paper);
+  margin-bottom:60px;
+}
+h2.stitle em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--lime);}
+
+/* ABOUT */
+#about{border-top:1px solid var(--border);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.about-text p{font-size:1.02rem;line-height:1.85;color:var(--muted);margin-bottom:20px;}
+.about-text p strong{color:var(--paper);font-weight:500;}
+.pillars{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--border);border:1px solid var(--border);
+}
+.pillar{
+  padding:28px;background:var(--ink);
+  cursor:pointer;transition:background .25s;
+}
+.pillar:hover{background:#111;}
+.p-icon{font-size:1.3rem;margin-bottom:14px;}
+.pillar h4{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem;letter-spacing:2px;
+  color:var(--paper);margin-bottom:8px;
+}
+.pillar p{font-size:.85rem;line-height:1.6;color:rgba(240,237,230,.38);}
+
+/* SERVICES */
+#services{background:#0d0d0d;border-top:1px solid var(--border);}
+.svc-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+}
+.svc{
+  padding:48px 36px;background:#0d0d0d;
+  position:relative;overflow:hidden;
+  cursor:pointer;transition:background .3s;
+}
+.svc::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:2px;
+  background:var(--lime);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.svc:hover{background:#111;}
+.svc:hover::after{transform:scaleX(1);}
+.svc-n{
+  font-family:'Bebas Neue',sans-serif;font-size:.8rem;
+  letter-spacing:3px;color:rgba(232,255,71,.35);margin-bottom:28px;
+}
+.svc h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.85rem;letter-spacing:2px;
+  color:var(--paper);margin-bottom:16px;line-height:1;
+}
+.svc p{font-size:.9rem;line-height:1.7;color:var(--muted);}
+.svc-arrow{
+  margin-top:38px;font-size:.75rem;
+  letter-spacing:2px;text-transform:uppercase;
+  color:rgba(240,237,230,.22);
+  display:flex;align-items:center;gap:10px;
+  transition:color .2s,gap .2s;
+}
+.svc:hover .svc-arrow{color:var(--lime);gap:18px;}
+.svc-arrow::after{content:'→';}
+
+/* WHY CHOOSE US */
+#why{border-top:1px solid var(--border);}
+.why-checks{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.why-item{
+  display:flex;flex-direction:column;align-items:flex-start;gap:14px;
+  padding:32px 28px;background:var(--ink);
+  transition:border-color .25s,background .25s;
+}
+.why-item:hover{background:#111;}
+.why-icon{
+  width:36px;height:36px;border-radius:2px;
+  background:rgba(232,255,71,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--lime);font-size:1rem;flex-shrink:0;
+}
+.why-item span{font-size:.95rem;color:rgba(240,237,230,.7);font-weight:400;letter-spacing:.3px;line-height:1.5;}
+
+/* TECHNOLOGIES */
+#tech{border-top:1px solid var(--border);background:#0d0d0d;}
+.tech-pills{display:flex;flex-wrap:wrap;gap:12px;}
+.tech-pill{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:.95rem;letter-spacing:2px;
+  padding:12px 24px;border-radius:2px;
+  border:1px solid var(--border);
+  color:rgba(240,237,230,.55);
+  transition:all .2s;cursor:default;
+}
+.tech-pill:hover{border-color:var(--lime);color:var(--lime);background:rgba(232,255,71,.04);}
+
+/* CONTACT */
+#contact{background:#0d0d0d;border-top:1px solid var(--border);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.cinfo h3{
+  font-family:'Instrument Serif',serif;
+  font-style:italic;font-size:2.1rem;
+  color:var(--paper);line-height:1.3;margin-bottom:22px;
+}
+.cinfo p{font-size:.95rem;line-height:1.8;color:var(--muted);margin-bottom:36px;}
+.cdetails{display:flex;flex-direction:column;gap:14px;}
+.cdetails a{
+  display:flex;align-items:center;gap:16px;
+  color:rgba(240,237,230,.45);
+  text-decoration:none;font-size:.9rem;
+  transition:color .2s;cursor:pointer;
+}
+.cdetails a:hover{color:var(--lime);}
+.cdetails a span{
+  width:34px;height:34px;
+  border:1px solid var(--border);
+  display:flex;align-items:center;
+  justify-content:center;border-radius:2px;
+  font-size:.85rem;flex-shrink:0;
+}
+.fform{display:flex;flex-direction:column;gap:14px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.ff{display:flex;flex-direction:column;gap:6px;}
+.ff label{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(240,237,230,.28);}
+.ff input,.ff textarea{
+  background:rgba(240,237,230,.04);
+  border:1px solid rgba(240,237,230,.1);
+  border-radius:2px;padding:13px 15px;
+  color:var(--paper);
+  font-family:'Figtree',sans-serif;
+  font-size:.95rem;font-weight:300;
+  outline:none;cursor:pointer;
+  transition:border-color .2s,background .2s;
+}
+.ff input:focus,.ff textarea:focus{
+  border-color:rgba(232,255,71,.4);
+  background:rgba(232,255,71,.025);
+}
+.ff textarea{height:130px;resize:none;}
+.fsub{margin-top:6px;display:flex;align-items:center;gap:18px;}
+.btn-send{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1rem;letter-spacing:3px;
+  background:var(--lime);color:var(--ink);
+  border:none;padding:13px 34px;
+  border-radius:2px;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+.btn-send:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(232,255,71,.22);
+}
+.fnote{font-size:.75rem;color:rgba(240,237,230,.2);}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:30px 52px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+}
+.flogo{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:3px;color:var(--paper);}
+.fcopy{font-size:.78rem;color:rgba(240,237,230,.22);letter-spacing:.5px;}
+.flinks{display:flex;gap:22px;}
+.flinks a{
+  font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(240,237,230,.22);text-decoration:none;
+  transition:color .2s;cursor:pointer;
+}
+.flinks a:hover{color:var(--lime);}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <!-- Minimalist M+U SVG Logo Mark -->
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer square frame -->
+      <rect x="1" y="1" width="34" height="34" rx="4" stroke="#e8ff47" stroke-width="1.5"/>
+      <!-- M shape -->
+      <path d="M7 26V10L13.5 19L20 10V26" stroke="#f0ede6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <!-- U shape -->
+      <path d="M22 10V21C22 23.8 24 26 27 26" stroke="#e8ff47" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      <path d="M32 10V21C32 23.8 30 26 27 26" stroke="#e8ff47" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="brand">MU SOFTEK</span>
+      <span class="sub">Solutions</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#why">Why Us</a>
+    <a href="#tech">Tech</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-body">
+    <div class="hero-eyebrow">MU SOFTEK Solutions Pvt. Ltd.</div>
+    <h1 class="htitle">
+      <span class="hline"><span>WE BUILD</span></span>
+      <span class="hline"><span><em class="italic-accent">Digital</em></span></span>
+      <span class="hline"><span>FUTURES</span></span>
+    </h1>
+  </div>
+  <div class="hero-foot">
+    <p class="hero-desc">Modern web, mobile & IT consulting that transforms your business vision into scalable, lasting digital reality.</p>
+    <div class="hero-scroll">
+      <div class="scroll-bar"></div>
+      <span>Scroll</span>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="n">200<sup>+</sup></div><small>Projects</small></div>
+      <div class="stat"><div class="n">8<sup>yr</sup></div><small>Experience</small></div>
+      <div class="stat"><div class="n">98<sup>%</sup></div><small>Satisfaction</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>WEB DEVELOPMENT</span><span class="mk">✦</span>
+    <span>APP DEVELOPMENT</span><span class="mk">✦</span>
+    <span>IT CONSULTING</span><span class="mk">✦</span>
+    <span>DIGITAL SOLUTIONS</span><span class="mk">✦</span>
+    <span>MU SOFTEK SOLUTIONS</span><span class="mk">✦</span>
+    <span>WEB DEVELOPMENT</span><span class="mk">✦</span>
+    <span>APP DEVELOPMENT</span><span class="mk">✦</span>
+    <span>IT CONSULTING</span><span class="mk">✦</span>
+    <span>DIGITAL SOLUTIONS</span><span class="mk">✦</span>
+    <span>MU SOFTEK SOLUTIONS</span><span class="mk">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-head"><span class="sec-num">01</span><span class="sec-dash"></span><span class="sec-tag">Who We Are</span></div>
+  <h2 class="stitle">ABOUT<br><em>US</em></h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>We are <strong>MU SOFTEK Solutions Pvt. Ltd.</strong> — a technology company that doesn't just write code, we architect possibilities.</p>
+      <p>From lean startups to enterprise systems, we deliver <strong>web development, app development,</strong> and <strong>IT consulting</strong> services that create measurable impact.</p>
+      <p>Every pixel, every function, every deployment — crafted with precision and purpose.</p>
+    </div>
+    <div class="pillars reveal">
+      <div class="pillar"><div class="p-icon">⚡</div><h4>Fast</h4><p>Optimized pipelines without compromising quality.</p></div>
+      <div class="pillar"><div class="p-icon">🔐</div><h4>Secure</h4><p>Security-first architecture from day one.</p></div>
+      <div class="pillar"><div class="p-icon">📐</div><h4>Precise</h4><p>Meticulous attention to detail in every build.</p></div>
+      <div class="pillar"><div class="p-icon">🌱</div><h4>Scalable</h4><p>Built to grow alongside your ambitions.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sec-head"><span class="sec-num">02</span><span class="sec-dash"></span><span class="sec-tag">What We Do</span></div>
+  <h2 class="stitle">OUR<br><em>Services</em></h2>
+  <div class="svc-grid">
+    <div class="svc reveal">
+      <div class="svc-n">— 001</div>
+      <h3>Web Development</h3>
+      <p>Responsive, blazing-fast websites and web apps engineered for performance, accessibility, and conversion.</p>
+      <div class="svc-arrow">Explore</div>
+    </div>
+    <div class="svc reveal">
+      <div class="svc-n">— 002</div>
+      <h3>App Development</h3>
+      <p>Native and cross-platform Android & iOS mobile apps. Intuitive interfaces. Rock-solid backends.</p>
+      <div class="svc-arrow">Explore</div>
+    </div>
+    <div class="svc reveal">
+      <div class="svc-n">— 003</div>
+      <h3>IT Consulting</h3>
+      <p>Strategic tech guidance, infrastructure audits, and digital transformation roadmaps tailored to your business.</p>
+      <div class="svc-arrow">Explore</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section id="why">
+  <div class="sec-head"><span class="sec-num">03</span><span class="sec-dash"></span><span class="sec-tag">Why Us</span></div>
+  <h2 class="stitle">WHY<br><em>Choose Us</em></h2>
+  <div class="why-checks reveal">
+    <div class="why-item">
+      <div class="why-icon">✔</div>
+      <span>Experienced Developers</span>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">✔</div>
+      <span>Agile Development Process</span>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">✔</div>
+      <span>On-Time Delivery</span>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">✔</div>
+      <span>24/7 Support</span>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGIES -->
+<section id="tech">
+  <div class="sec-head"><span class="sec-num">04</span><span class="sec-dash"></span><span class="sec-tag">Our Stack</span></div>
+  <h2 class="stitle">TECHNOLOGIES<br><em>We Use</em></h2>
+  <div class="tech-pills reveal">
+    <div class="tech-pill">React</div>
+    <div class="tech-pill">Node.js</div>
+    <div class="tech-pill">Java</div>
+    <div class="tech-pill">Python</div>
+    <div class="tech-pill">AWS</div>
+    <div class="tech-pill">MySQL</div>
+    <div class="tech-pill">MongoDB</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-head"><span class="sec-num">05</span><span class="sec-dash"></span><span class="sec-tag">Get In Touch</span></div>
+  <h2 class="stitle">LET'S<br><em>Talk</em></h2>
+  <div class="contact-grid">
+    <div class="cinfo reveal">
+      <h3>Have a project in mind? We'd love to hear about it.</h3>
+      <p>Whether you're starting fresh or need expert hands on an existing system — reach out and let's figure it out together.</p>
+    </div>
+    <form class="fform reveal" onsubmit="return false;">
+      <div class="frow">
+        <div class="ff"><label>Name</label><input type="text" placeholder="John Doe"/></div>
+        <div class="ff"><label>Email</label><input type="email" placeholder="john@company.com"/></div>
+      </div>
+      <div class="ff"><label>Subject</label><input type="text" placeholder="Project brief or inquiry"/></div>
+      <div class="ff"><label>Message</label><textarea placeholder="Tell us about your project..."></textarea></div>
+      <div class="fsub">
+        <button class="btn-send" type="submit">SEND MESSAGE</button>
+        <span class="fnote">We reply within 24 hours.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">MU SOFTEK SOLUTIONS</div>
+  <span class="fcopy">© 2026 MU SOFTEK Solutions Pvt. Ltd. All rights reserved.</span>
+  <div class="flinks">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+
+<script>
+/* Scroll reveal */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
